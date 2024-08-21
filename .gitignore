@@ -269,7 +269,7 @@ pyrightconfig.json
 __pycache__/
 
 instance/
-static/
+uploads/
 
 .pytest_cache/
 .coverage
