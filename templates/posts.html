@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Posts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Lista de Posts</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Data</th>
+                <th>Tag</th>
+                <th>Texto</th>
+                <th>Fotos</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td>{{ post.id }}</td>
+                <td>{{ post.titulo }}</td>
+                <td>{{ post.data.strftime('%d/%m/%Y %H:%M:%S') }}</td>
+                <td>{{ post.tag }}</td>
+                <td>{{ post.texto }}</td>
+                <td>
+                    {% if post.fotos %}
+                    <ul>
+                        {% for foto in post.fotos %}
+                        <li>
+                            <img src="{{ url_for('static', filename='uploads/'+foto.caminho) }}" alt="{{ foto.nome }}" style="max-width: 100px;">
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    Nenhuma foto
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
